@@ -1,0 +1,6 @@
+serviceConfig:
+  env: local
+logConfig:
+  logLevel: debug
+  logPath: robot.log
+  logMode: file
