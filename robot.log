@@ -1,7 +1,0 @@
-{"level_name":"[DEBUG]","time":"2023-01-11 17:24:45.962","caller_line":"[robot/connection.go:78]","msg":"wrap","wc":{}}
-{"level_name":"[DEBUG]","time":"2023-01-11 17:24:45.973","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"TEST\" body:{enterRoomRsp:{}}"}
-{"level_name":"[DEBUG]","time":"2023-01-11 17:24:45.984","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"1:200 3:\"\""}
-{"level_name":"[DEBUG]","time":"2023-01-11 17:24:47.974","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
-{"level_name":"[DEBUG]","time":"2023-01-11 17:24:49.970","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
-{"level_name":"[DEBUG]","time":"2023-01-11 17:24:51.968","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
-{"level_name":"[DEBUG]","time":"2023-01-11 17:24:53.971","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
