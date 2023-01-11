@@ -1,0 +1,19 @@
+{"level_name":"[DEBUG]","time":"2023-01-11 17:06:34.903","caller_line":"[robot/connection.go:93]","msg":"Rsp","Rsp":"seq:\"TEST\" body:{enterRoomRsp:{}}"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:06:36.902","caller_line":"[robot/connection.go:93]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:06:38.894","caller_line":"[robot/connection.go:93]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
+{"level_name":"[ERROR]","time":"2023-01-11 17:06:39.901","caller_line":"[robot/connection.go:89]","msg":"ReadMessageError","error":"websocket: close 1006 (abnormal closure): unexpected EOF"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:08:13.721","caller_line":"[robot/connection.go:78]","msg":"wrap","wc":{}}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:08:13.733","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"TEST\" body:{enterRoomRsp:{}}"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:08:15.726","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:08:17.726","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:08:19.733","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:08:21.731","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:08:23.729","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:08:25.729","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:08:27.729","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:08:29.731","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:08:31.730","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:08:33.730","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:08:35.730","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
+{"level_name":"[DEBUG]","time":"2023-01-11 17:08:37.725","caller_line":"[robot/connection.go:94]","msg":"Rsp","Rsp":"seq:\"Test\" code:10000 msg:\"room unexist\" body:{}"}
+{"level_name":"[ERROR]","time":"2023-01-11 17:08:38.450","caller_line":"[robot/connection.go:90]","msg":"ReadMessageError","error":"websocket: close 1006 (abnormal closure): unexpected EOF"}
