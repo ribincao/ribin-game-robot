@@ -1,9 +1,11 @@
 package robot
 
 import (
+	"fmt"
 	"ribin-game-robot/utils"
-	"sync/atomic"
 	"time"
+
+	"go.uber.org/atomic"
 
 	"github.com/gorilla/websocket"
 	"github.com/ribincao/ribin-game-server/codec"
@@ -49,17 +51,18 @@ func DialWrapConn(playerId string, roomId string) *WrapConnection {
 }
 
 type WrapConnection struct {
-	playerId string
-	roomId   string
-	frame    chan *base.Frame
-	roomConn *websocket.Conn
-	isClose  atomic.Bool
+	playerId   string
+	roomId     string
+	roomConn   *websocket.Conn
+	isClose    atomic.Bool
+	SeqCounter *atomic.Int32
 }
 
 func NewWrapConnection(playId string, roomId string) *WrapConnection {
 	return &WrapConnection{
-		playerId: playId,
-		roomId:   roomId,
+		playerId:   playId,
+		roomId:     roomId,
+		SeqCounter: atomic.NewInt32(0),
 	}
 }
 
@@ -68,17 +71,8 @@ func (wc *WrapConnection) SendMessage(req *base.Client2ServerReq) error {
 	return wc.roomConn.WriteMessage(websocket.BinaryMessage, client2serverReq)
 }
 
-func (wc *WrapConnection) EnterRoom() error {
-	enterRoomReq := &base.Client2ServerReq{
-		Cmd: base.Client2ServerReqCmd_E_CMD_ROOM_ENTER,
-		Seq: "TEST",
-		Body: &base.ReqBody{
-			PlayerId:     wc.playerId,
-			RoomId:       wc.roomId,
-			EnterRoomReq: &base.EnterRoomReq{},
-		},
-	}
-	return wc.SendMessage(enterRoomReq)
+func (wc *WrapConnection) GetSeq() string {
+	return fmt.Sprintf("%s-%d", wc.playerId, wc.SeqCounter.Add(1))
 }
 
 func (wc *WrapConnection) ReadMessage() {
@@ -108,7 +102,7 @@ func (wc *WrapConnection) RoomHeartBeat() {
 	for {
 		select {
 		case <-ticker.C:
-			seq := "Test"
+			seq := wc.GetSeq()
 			heartbeatReq := &base.Client2ServerReq{
 				Cmd: base.Client2ServerReqCmd_E_CMD_HEART_BEAT,
 				Seq: seq,

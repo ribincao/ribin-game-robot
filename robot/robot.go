@@ -1,12 +1,14 @@
 package robot
 
 import (
+	"fmt"
 	"sync"
 	"time"
 
 	"github.com/ribincao/ribin-game-server/logger"
 	"github.com/ribincao/ribin-game-server/utils"
 	"github.com/ribincao/ribin-protocol/base"
+	"go.uber.org/atomic"
 	"go.uber.org/zap"
 )
 
@@ -24,24 +26,32 @@ func AddRobot(robotId string) string {
 }
 
 type Robot struct {
-	Id       string
-	RoomId   string
-	wrapconn *WrapConnection
-	Position *base.Position
+	Id         string
+	RoomId     string
+	wrapconn   *WrapConnection
+	Position   *base.Position
+	SeqCounter *atomic.Int32
 }
 
 func NewRobot(robotId string) *Robot {
 	return &Robot{
-		Id: robotId,
+		Id:         robotId,
+		RoomId:     "test",
+		SeqCounter: atomic.NewInt32(0),
 	}
 }
 
 func (r *Robot) EnterRoom(roomId string) {
 	r.wrapconn = DialWrapConn(r.Id, roomId)
+	r.Position = &base.Position{
+		X: 5,
+		Y: 2,
+		Z: 1,
+	}
 
 	enterRoomReq := &base.Client2ServerReq{
 		Cmd: base.Client2ServerReqCmd_E_CMD_ROOM_ENTER,
-		Seq: "TEST",
+		Seq: fmt.Sprintf("%s-ENTER_ROOM", r.Id),
 		Body: &base.ReqBody{
 			PlayerId:     r.Id,
 			RoomId:       r.RoomId,
@@ -57,6 +67,10 @@ func (r *Robot) EnterRoom(roomId string) {
 	})
 }
 
+func (r *Robot) GetSeq() string {
+	return fmt.Sprintf("%s-%d", r.Id, r.SeqCounter.Add(1))
+}
+
 func (r *Robot) GetFrameReq() *base.Client2ServerReq {
 	frame := &base.Frame{
 		Position: r.Position,
@@ -66,7 +80,7 @@ func (r *Robot) GetFrameReq() *base.Client2ServerReq {
 	}
 	return &base.Client2ServerReq{
 		Cmd:  base.Client2ServerReqCmd_E_CMD_ROOM_FRAME,
-		Seq:  "",
+		Seq:  r.GetSeq(),
 		Body: body,
 	}
 }
