@@ -42,18 +42,16 @@ func DialRoomConn(Ip string, Port int32) (*websocket.Conn, error) {
 	return conn, nil
 }
 
-func DialWrapConn(playerId string, roomId string) (*WrapConnection, error) {
+func DialWrapConn(playerId string, roomId string) *WrapConnection {
 	wrapConn := NewWrapConnection(playerId, roomId)
 	wrapConn.roomConn, _ = DialRoomConn("localhost", 8080)
-	err := wrapConn.EnterRoom()
-	go wrapConn.RoomHeartBeat()
-	go wrapConn.ReadMessage()
-	return wrapConn, err
+	return wrapConn
 }
 
 type WrapConnection struct {
 	playerId string
 	roomId   string
+	frame    chan *base.Frame
 	roomConn *websocket.Conn
 	isClose  atomic.Bool
 }
@@ -63,6 +61,11 @@ func NewWrapConnection(playId string, roomId string) *WrapConnection {
 		playerId: playId,
 		roomId:   roomId,
 	}
+}
+
+func (wc *WrapConnection) SendMessage(req *base.Client2ServerReq) error {
+	client2serverReq, _ := MarshalAndEncode(req)
+	return wc.roomConn.WriteMessage(websocket.BinaryMessage, client2serverReq)
 }
 
 func (wc *WrapConnection) EnterRoom() error {
@@ -75,9 +78,7 @@ func (wc *WrapConnection) EnterRoom() error {
 			EnterRoomReq: &base.EnterRoomReq{},
 		},
 	}
-	logger.Debug("wrap", zap.Any("wc", wc))
-	req, _ := MarshalAndEncode(enterRoomReq)
-	return wc.roomConn.WriteMessage(websocket.BinaryMessage, req)
+	return wc.SendMessage(enterRoomReq)
 }
 
 func (wc *WrapConnection) ReadMessage() {
